@@ -1,5 +1,5 @@
-# Github App
-Github App Part 1.
+# User App
+User App Part 1.
 
 ## Author
 #### Labib Hiba
