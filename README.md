@@ -1,5 +1,5 @@
 # User App
-User App Part 2.
+Github User App Part 2.
 
 ## Author
 #### Labib Hiba
