@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Github User</string>
+
+    <string name="img_photo">Img Photo</string>
+    <string name="avatar_user">Avatar user</string>
+    <string name="info">Info user</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="repo">Repository</string>
+    <string name="tab_follower">FOLLOWERS</string>
+    <string name="tab_following">FOLLOWING</string>
+    <string name="welcome">Hii!, \nWelcome to \nGithub User Search</string>
+    <string name="find">lets Find</string>
+    <string name="not_found">Not Found</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting">Setting</string>
+    <string name="favorite">Favorite User</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

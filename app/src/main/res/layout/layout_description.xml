@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:text="@string/info"
+        style="@style/TvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/share_icon"
+        style="@style/CheckBox"
+        android:layout_marginEnd="6dp"
+        android:button="@drawable/selector_share"
+        app:useMaterialThemeColors="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/favorite_icon"
+        style="@style/CheckBox"
+        android:layout_marginEnd="45dp"
+        app:useMaterialThemeColors="false"
+        android:button="@drawable/favorite_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_text_company"
+        style="@style/TvSubTitle"
+        app:drawableStartCompat="@drawable/ic_baseline_apartment_24"
+        tools:text="company"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_info" />
+
+    <TextView
+        android:id="@+id/tv_text_location"
+        style="@style/TvSubTitle"
+        app:drawableStartCompat="@drawable/ic_baseline_location_on_24"
+        tools:text="location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_text_company" />
+
+    <TextView
+        android:id="@+id/tv_text_repo"
+        style="@style/TvSubTitle"
+        app:drawableStartCompat="@drawable/ic_baseline_topic_24"
+        tools:text="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_text_location"/>
+
+    <TextView
+        style="@style/TvSubTitle"
+        android:layout_marginStart="0dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_text_repo"
+        app:layout_constraintTop_toBottomOf="@id/tv_text_location"
+        android:text="@string/repo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
