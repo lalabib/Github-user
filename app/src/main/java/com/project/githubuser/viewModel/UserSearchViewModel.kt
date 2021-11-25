@@ -19,10 +19,6 @@ class UserSearchViewModel: ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    companion object {
-        private const val TAG = "UserSearchViewModel"
-    }
-
     fun setUser(username: String) {
         _isLoading.value = true
         ApiClient.instance.getUser(username).enqueue(object : Callback<UserResponse> {
@@ -40,5 +36,9 @@ class UserSearchViewModel: ViewModel() {
                 Log.e(TAG,"onFailure: ${t.message.toString()}")
             }
         })
+    }
+    
+    companion object {
+      private const val TAG = "UserSearchViewModel"
     }
 }
