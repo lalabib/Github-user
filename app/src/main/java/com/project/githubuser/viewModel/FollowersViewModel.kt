@@ -18,10 +18,6 @@ class FollowersViewModel : ViewModel(){
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    companion object {
-        private const val TAG = "FollowerViewModel"
-    }
-
     fun setFollower(username : String) {
         _isLoading.value = true
         ApiClient.instance.getFollower(username).enqueue(object : Callback<ArrayList<User>> {
@@ -39,5 +35,9 @@ class FollowersViewModel : ViewModel(){
                 Log.e(TAG,"onFailure: ${t.message.toString()}")
             }
         })
+    }
+    
+    companion object {
+        private const val TAG = "FollowerViewModel"
     }
 }
