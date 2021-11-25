@@ -8,10 +8,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ApiClient {
     private const val URL = url
     val instance: ApiEndpoint by lazy {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+       
+        val Interceptor = if(BuildConfig.DEBUG) {
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+        }
+        
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-
         val retrofit = Retrofit.Builder()
             .baseUrl(URL)
             .client(client)
