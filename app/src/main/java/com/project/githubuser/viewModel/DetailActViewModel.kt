@@ -32,10 +32,6 @@ class DetailActViewModel(application: Application): AndroidViewModel(application
         userDao = userDb?.userFavDAo()
     }
 
-    companion object {
-        private const val TAG = "DetailActViewModel"
-    }
-
     fun setDetail(username: String) {
         _isLoading.value = true
         ApiClient.instance.getDetail(username).enqueue(object : Callback<User> {
@@ -69,5 +65,9 @@ class DetailActViewModel(application: Application): AndroidViewModel(application
         CoroutineScope(Dispatchers.IO).launch {
             userDao?.removeFromFavorite(id)
         }
+    }
+
+    companion object {
+        private const val TAG = "DetailActViewModel"
     }
 }
