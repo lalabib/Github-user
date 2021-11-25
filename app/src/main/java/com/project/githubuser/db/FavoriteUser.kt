@@ -9,6 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class FavoriteUser (
     val login: String,
+    
     @PrimaryKey
     var id: Int,
     val avatar_url: String
