@@ -53,11 +53,13 @@ class DetailActivity: AppCompatActivity() {
         detailActViewModel.setDetail(username)
         detailActViewModel.userDetail.observe(this, { users ->
             Glide.with(this).load(users.avatar_url).circleCrop().into(binding.imgAvatar)
-            binding.tvTextName.text = users.name
-            binding.tvTextUsername.text = users.login
-            binding.includeDescription.tvTextCompany.text = users.company
-            binding.includeDescription.tvTextLocation.text = users.location
-            binding.includeDescription.tvTextRepo.text = users.public_repos.toString()
+            binding.apply {
+                tvTextName.text = users.name
+                tvTextUsername.text = users.login
+                includeDescription.tvTextCompany.text = users.company
+                includeDescription.tvTextLocation.text = users.location
+                includeDescription.tvTextRepo.text = users.public_repos.toString()
+            }
         })
 
         detailActViewModel.isLoading.observe(this, {
