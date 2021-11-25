@@ -27,14 +27,6 @@ class DetailActivity: AppCompatActivity() {
 
     var id: Int = 0
 
-    companion object {
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_following,
-            R.string.tab_follower
-        )
-        const val EXTRA_DETAIL = "extra_detail"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -113,5 +105,13 @@ class DetailActivity: AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.pbDetail.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+    
+    companion object {
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_following,
+            R.string.tab_follower
+        )
+        const val EXTRA_DETAIL = "extra_detail"
     }
 }
