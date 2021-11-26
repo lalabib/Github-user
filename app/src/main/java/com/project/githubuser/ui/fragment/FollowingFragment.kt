@@ -19,18 +19,6 @@ class FollowingFragment : Fragment() {
 
     private lateinit var binding: FragmentFollowingBinding
 
-    companion object {
-        private const val ARG_USERNAME = "username"
-
-        fun getUsername(username: String) : FollowingFragment {
-            val fragment = FollowingFragment()
-            val bundle = Bundle()
-            bundle.putString(ARG_USERNAME, username)
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
-
     private val listUser = ArrayList<User>()
     private lateinit var followingViewModel: FollowingViewModel
 
@@ -91,5 +79,17 @@ class FollowingFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.pbFollowing.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+    
+     companion object {
+        private const val ARG_USERNAME = "username"
+
+        fun getUsername(username: String) : FollowingFragment {
+            val fragment = FollowingFragment()
+            val bundle = Bundle()
+            bundle.putString(ARG_USERNAME, username)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }
