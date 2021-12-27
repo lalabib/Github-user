@@ -17,15 +17,16 @@ import com.project.githubuser.viewModel.FollowingViewModel
 
 class FollowingFragment : Fragment() {
 
-    private lateinit var binding: FragmentFollowingBinding
+    private var _binding: FragmentFollowingBinding? = null
+    private val binding get() = _binding
 
     private val listUser = ArrayList<User>()
     private lateinit var followingViewModel: FollowingViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-        binding = FragmentFollowingBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        savedInstanceState: Bundle?): View? {
+        _binding = FragmentFollowingBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -34,12 +35,12 @@ class FollowingFragment : Fragment() {
 
         val username = arguments?.getString(ARG_USERNAME).toString()
 
-        binding.rvFollowing.layoutManager = LinearLayoutManager(activity)
-        binding.rvFollowing.setHasFixedSize(true)
+        binding?.rvFollowing?.layoutManager = LinearLayoutManager(activity)
+        binding?.rvFollowing?.setHasFixedSize(true)
 
         val userAdapter = ListUserAdapter(listUser)
         userAdapter.notifyDataSetChanged()
-        binding.rvFollowing.adapter = userAdapter
+        binding?.rvFollowing?.adapter = userAdapter
 
         followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
             .get(FollowingViewModel::class.java)
@@ -68,17 +69,17 @@ class FollowingFragment : Fragment() {
     }
 
     private fun isFollowing() {
-        binding.rvFollowing.visibility = View.VISIBLE
-        binding.ivNotFollowing.visibility = View.INVISIBLE
+        binding?.rvFollowing?.visibility = View.VISIBLE
+        binding?.ivNotFollowing?.visibility = View.INVISIBLE
     }
 
     private fun isNotFollowing() {
-        binding.rvFollowing.visibility = View.INVISIBLE
-        binding.ivNotFollowing.visibility = View.VISIBLE
+        binding?.rvFollowing?.visibility = View.INVISIBLE
+        binding?.ivNotFollowing?.visibility = View.VISIBLE
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.pbFollowing.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding?.pbFollowing?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
     
      companion object {

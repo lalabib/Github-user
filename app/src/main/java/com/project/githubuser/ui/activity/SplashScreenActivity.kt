@@ -14,7 +14,7 @@ import com.project.githubuser.viewModel.SettingPreferenceViewModel
 import com.project.githubuser.viewModel.ViewModelFactory
 
 class SplashScreenActivity : AppCompatActivity() {
-    private val time: Long = 1500
+    private val time: Long = 1300
     private val alpha0 = 0f
     private val alpha1 = 1f
     private var propertyAnim: ViewPropertyAnimator? = null
