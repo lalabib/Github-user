@@ -5,6 +5,7 @@
     <string name="avatar_user">Avatar user</string>
     <string name="info">Info user</string>
     <string name="title">Detail User</string>
+    <string name="press_again">Press back again to exit</string>
 
     <string-array name="username">
         <item>JakeWharton</item>

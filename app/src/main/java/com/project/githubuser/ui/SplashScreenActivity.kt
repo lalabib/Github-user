@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import com.project.githubuser.databinding.ActivitySplashScreenBinding
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
 

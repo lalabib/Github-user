@@ -16,7 +16,7 @@
             android:name=".ui.DetailActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.SplashScreen"
+            android:name=".ui.SplashScreenActivity"
             android:theme="@style/Theme.GithubUser.NoActionBar"
             android:exported="true">
             <intent-filter>
