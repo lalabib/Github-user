@@ -51,22 +51,21 @@ class FollowersFragment : Fragment() {
         userAdapter.notifyDataSetChanged()
         rv_followers.adapter = userAdapter
 
-        followersViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(FollowersViewModel::class.java)
+        followersViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[FollowersViewModel::class.java]
 
         followersViewModel.setFollower(username)
-        followersViewModel.listFollowers.observe(requireActivity(), { users ->
+        followersViewModel.listFollowers.observe(requireActivity()) { users ->
             if ((users != null) && (users.size != 0)) {
                 userAdapter.setUser(users)
-               isFollower()
+                isFollower()
             } else {
                 isNotFollower()
             }
-        })
+        }
 
-        followersViewModel.isLoading.observe(requireActivity(), {
+        followersViewModel.isLoading.observe(requireActivity()) {
             showLoading(it)
-        })
+        }
 
         userAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {

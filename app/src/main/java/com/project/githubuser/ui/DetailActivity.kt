@@ -47,22 +47,21 @@ class DetailActivity: AppCompatActivity() {
         supportActionBar?.hide()
         btn_back.setOnClickListener{ finish() }
 
-        detailActViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(DetailActViewModel::class.java)
+        detailActViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailActViewModel::class.java]
 
         detailActViewModel.setDetail(username)
-        detailActViewModel.userDetail.observe(this, { users ->
+        detailActViewModel.userDetail.observe(this) { users ->
             Glide.with(this).load(users.avatar_url).circleCrop().into(img_avatar)
             tv_text_name.text = users.name
             tv_text_username.text = users.login
             tv_text_company.text = users.company
             tv_text_location.text = users.location
             tv_text_repo.text = users.public_repos.toString()
-        })
+        }
 
-        detailActViewModel.isLoading.observe(this, {
+        detailActViewModel.isLoading.observe(this) {
             showLoading(it)
-        })
+        }
 
         share_icon.setOnClickListener {
             val sendIntent : Intent = Intent().apply {

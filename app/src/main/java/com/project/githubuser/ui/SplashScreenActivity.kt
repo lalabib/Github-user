@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import com.project.githubuser.R
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreenActivity : AppCompatActivity() {
     private val time:Long = 1100
 
     override fun onCreate(savedInstanceState: Bundle?) {

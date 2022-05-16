@@ -17,7 +17,6 @@ import com.project.githubuser.R
 import com.project.githubuser.adapter.ListUserAdapter
 import com.project.githubuser.model.User
 import com.project.githubuser.viewModel.UserSearchViewModel
-import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -47,21 +46,20 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        userSearchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(UserSearchViewModel::class.java)
+        userSearchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[UserSearchViewModel::class.java]
 
-        userSearchViewModel.userSearch.observe(this, { users ->
-            if ((users != null) && (users.size != 0)){
+        userSearchViewModel.userSearch.observe(this) { users ->
+            if ((users != null) && (users.size != 0)) {
                 listUserAdapter.setUser(users)
                 isFound()
             } else {
                 isNotFound()
             }
-        })
+        }
 
-        userSearchViewModel.isLoading.observe(this, {
+        userSearchViewModel.isLoading.observe(this) {
             showLoading(it)
-        })
+        }
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         search.setSearchableInfo(searchManager.getSearchableInfo(componentName))
@@ -75,7 +73,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-
     }
 
     override fun onBackPressed() {
