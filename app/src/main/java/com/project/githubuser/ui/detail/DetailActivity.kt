@@ -52,11 +52,15 @@ class DetailActivity : AppCompatActivity() {
                 .load(users.avatar_url)
                 .circleCrop()
                 .into(binding.imgAvatar)
-            binding.tvTextName.text = users.name
-            binding.tvTextUsername.text = users.login
-            bindingDesc.tvTextCompany.text = users.company
-            bindingDesc.tvTextLocation.text = users.location
-            bindingDesc.tvTextRepo.text = users.public_repos.toString()
+            binding.apply {
+                tvTextName.text = users.name
+                tvTextUsername.text = users.login
+            }
+            bindingDesc.apply {
+                tvTextCompany.text = users.company
+                tvTextLocation.text = users.location
+                tvTextRepo.text = users.public_repos.toString()
+            }
         }
 
         detailActViewModel.isLoading.observe(this) {
