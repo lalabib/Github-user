@@ -1,4 +1,4 @@
-package com.project.githubuser.ui
+package com.project.githubuser.ui.detail
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,26 +11,21 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.githubuser.R
 import com.project.githubuser.adapter.SectionsPagerAdapter
+import com.project.githubuser.databinding.ActivityDetailBinding
+import com.project.githubuser.databinding.LayoutDescriptionBinding
 import com.project.githubuser.model.User
-import com.project.githubuser.viewModel.DetailActViewModel
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.layout_description.*
 
-class DetailActivity: AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
-    private lateinit var detailActViewModel: DetailActViewModel
-
-    companion object {
-        private val TAB_TITLES = intArrayOf(
-            R.string.tab_following,
-            R.string.tab_follower
-        )
-        const val EXTRA_DETAIL = "extra_detail"
-    }
+    private lateinit var binding: ActivityDetailBinding
+    private lateinit var bindingDesc: LayoutDescriptionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        bindingDesc = binding.incDesc
 
         val user = intent.getParcelableExtra<User>(EXTRA_DETAIL)
         val username = user?.login.toString()
@@ -44,27 +39,32 @@ class DetailActivity: AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        supportActionBar?.hide()
-        btn_back.setOnClickListener{ finish() }
+        binding.btnBack.setOnClickListener { finish() }
 
-        detailActViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailActViewModel::class.java]
+        val detailActViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[DetailActViewModel::class.java]
 
         detailActViewModel.setDetail(username)
         detailActViewModel.userDetail.observe(this) { users ->
-            Glide.with(this).load(users.avatar_url).circleCrop().into(img_avatar)
-            tv_text_name.text = users.name
-            tv_text_username.text = users.login
-            tv_text_company.text = users.company
-            tv_text_location.text = users.location
-            tv_text_repo.text = users.public_repos.toString()
+            Glide.with(this)
+                .load(users.avatar_url)
+                .circleCrop()
+                .into(binding.imgAvatar)
+            binding.tvTextName.text = users.name
+            binding.tvTextUsername.text = users.login
+            bindingDesc.tvTextCompany.text = users.company
+            bindingDesc.tvTextLocation.text = users.location
+            bindingDesc.tvTextRepo.text = users.public_repos.toString()
         }
 
         detailActViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-        share_icon.setOnClickListener {
-            val sendIntent : Intent = Intent().apply {
+        bindingDesc.shareIcon.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, "Github User : \n${user?.html_url} ")
                 type = "text/html"
@@ -75,6 +75,14 @@ class DetailActivity: AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        pb_detail.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.pbDetail.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_following,
+            R.string.tab_follower
+        )
+        const val EXTRA_DETAIL = "extra_detail"
     }
 }

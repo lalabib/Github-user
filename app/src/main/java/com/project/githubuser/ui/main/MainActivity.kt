@@ -1,4 +1,4 @@
-package com.project.githubuser.ui
+package com.project.githubuser.ui.main
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
@@ -15,38 +15,42 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.githubuser.R
 import com.project.githubuser.adapter.ListUserAdapter
+import com.project.githubuser.databinding.ActivityMainBinding
 import com.project.githubuser.model.User
-import com.project.githubuser.viewModel.UserSearchViewModel
-import kotlinx.android.synthetic.main.activity_main.*
+import com.project.githubuser.ui.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private var doubleBackToExitPressedOnce: Boolean = false
-    private val pressed:Long = 2000
-    private lateinit var userSearchViewModel: UserSearchViewModel
+    private val pressed: Long = 2000
+
     private val listUser = ArrayList<User>()
     private val listUserAdapter = ListUserAdapter(listUser)
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        rv_users.layoutManager = LinearLayoutManager(this)
-        rv_users.setHasFixedSize(true)
+        binding.rvUsers.layoutManager = LinearLayoutManager(this)
+        binding.rvUsers.setHasFixedSize(true)
         listUserAdapter.notifyDataSetChanged()
-        rv_users.adapter = listUserAdapter
+        binding.rvUsers.adapter = listUserAdapter
 
-        listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+        listUserAdapter.onItemClickCallback = object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
                 val detailAct = Intent(this@MainActivity, DetailActivity::class.java)
                 detailAct.putExtra(DetailActivity.EXTRA_DETAIL, user)
                 startActivity(detailAct)
             }
-        })
+        }
 
-        userSearchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[UserSearchViewModel::class.java]
+        val userSearchViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[UserSearchViewModel::class.java]
 
         userSearchViewModel.userSearch.observe(this) { users ->
             if ((users != null) && (users.size != 0)) {
@@ -62,13 +66,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        search.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.search.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 userSearchViewModel.setUser(query)
-                search.clearFocus()
+                binding.search.clearFocus()
                 return true
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }
@@ -82,25 +87,25 @@ class MainActivity : AppCompatActivity() {
             return
         }
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, R.string.press_again, Toast.LENGTH_SHORT).show()
         Handler(Looper.getMainLooper()).postDelayed({
             doubleBackToExitPressedOnce = false
         }, pressed)
     }
 
     private fun isNotFound() {
-        rv_users.visibility = View.INVISIBLE
-        iv_find.visibility = View.INVISIBLE
-        iv_notFound.visibility = View.VISIBLE
+        binding.rvUsers.visibility = View.INVISIBLE
+        binding.ivFind.visibility = View.INVISIBLE
+        binding.ivNotFound.visibility = View.VISIBLE
     }
 
     private fun isFound() {
-        rv_users.visibility = View.VISIBLE
-        iv_find.visibility = View.INVISIBLE
-        iv_notFound.visibility = View.INVISIBLE
+        binding.rvUsers.visibility = View.VISIBLE
+        binding.ivFind.visibility = View.INVISIBLE
+        binding.ivNotFound.visibility = View.INVISIBLE
     }
 
     private fun showLoading(isLoading: Boolean) {
-        pb_main.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.pbMain.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

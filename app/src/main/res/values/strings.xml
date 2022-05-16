@@ -12,7 +12,5 @@
     <string name="welcome">Hii!, \nWelcome to \nGithub User Search</string>
     <string name="find">lets Find</string>
     <string name="not_found">Not Found</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="press_again">Press back again to exit</string>
 </resources>
