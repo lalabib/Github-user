@@ -7,7 +7,7 @@ import com.project.githubuser.preference.SettingPreferences
 class ViewModelFactory(private val pref: SettingPreferences) : NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SettingPreferenceViewModel::class.java)) {
             return SettingPreferenceViewModel(pref) as T
         }

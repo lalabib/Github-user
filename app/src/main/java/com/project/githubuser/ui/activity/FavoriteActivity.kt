@@ -54,18 +54,13 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun mapList(users: List<FavoriteUser>): ArrayList<User> {
+    private fun mapList(users: List<FavoriteUser>): ArrayList<User>{
         val listUsers = ArrayList<User>()
         for (user in users) {
             val userMapped = User(
                 user.id,
                 user.login,
-                user.avatar_url,
-                user.name,
-                user.company,
-                user.location,
-                user.public_repos,
-                user.html_url,
+                user.avatar_url
             )
             listUsers.add(userMapped)
         }

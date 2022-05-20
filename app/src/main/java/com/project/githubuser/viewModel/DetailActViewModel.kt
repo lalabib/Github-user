@@ -17,7 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailActViewModel(application: Application): AndroidViewModel(application) {
+class DetailActViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _userDetail = MutableLiveData<User>()
     val userDetail: LiveData<User> = _userDetail
@@ -46,7 +46,7 @@ class DetailActViewModel(application: Application): AndroidViewModel(application
 
             override fun onFailure(call: Call<User>, t: Throwable) {
                 _isLoading.value = false
-                Log.e(TAG,"onFailure: ${t.message.toString()}")
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
     }

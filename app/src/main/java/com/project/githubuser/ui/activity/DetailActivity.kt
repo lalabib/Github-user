@@ -33,7 +33,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val user = intent.getParcelableExtra<User>(EXTRA_DETAIL)
-        val username = user?.login.toString()
+        val login = user?.login.toString()
         val avatarUrl = user?.avatar_url.toString()
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
@@ -50,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
 
         detailActViewModel = ViewModelProvider(this)[DetailActViewModel::class.java]
 
-        detailActViewModel.setDetail(username)
+        detailActViewModel.setDetail(login)
         detailActViewModel.userDetail.observe(this) { users ->
             Glide.with(this).load(users.avatar_url).circleCrop().into(binding.imgAvatar)
             binding.apply {
@@ -85,7 +85,7 @@ class DetailActivity : AppCompatActivity() {
         binding.includeDescription.favoriteIcon.setOnClickListener {
             isCheck = !isCheck
             if (isCheck) {
-                detailActViewModel.addToFavorite(username, id, avatarUrl)
+                detailActViewModel.addToFavorite(login, id, avatarUrl)
                 Toast.makeText(this@DetailActivity, "Added to Favorites", Toast.LENGTH_SHORT).show()
             } else {
                 detailActViewModel.removeFromFavorite(id)
