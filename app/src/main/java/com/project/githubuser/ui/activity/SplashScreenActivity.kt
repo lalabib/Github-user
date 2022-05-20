@@ -27,7 +27,6 @@ class SplashScreenActivity : AppCompatActivity() {
 
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
 
         val pref = SettingPreferences.getInstance(dataStore)
         settingPreferenceViewModel =

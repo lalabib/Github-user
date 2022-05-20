@@ -28,7 +28,6 @@ class FavoriteActivity : AppCompatActivity() {
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
         binding.btnBack.setOnClickListener { finish() }
 
         binding.rvFav.layoutManager = LinearLayoutManager(this)

@@ -45,7 +45,6 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        supportActionBar?.hide()
         binding.btnBack.setOnClickListener { finish() }
 
         detailActViewModel = ViewModelProvider(this)[DetailActViewModel::class.java]
