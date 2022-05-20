@@ -8,9 +8,13 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "favorite_user")
 @Parcelize
 data class FavoriteUser (
-    val login: String,
-    
     @PrimaryKey
     var id: Int,
-    val avatar_url: String
+    var login: String,
+    var avatar_url: String,
+    var name: String,
+    var location: String,
+    var company: String,
+    var public_repos: String,
+    var html_url: String
     ):Parcelable

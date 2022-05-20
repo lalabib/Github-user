@@ -30,10 +30,10 @@ class SplashScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val pref = SettingPreferences.getInstance(dataStore)
-        settingPreferenceViewModel = ViewModelProvider(this, ViewModelFactory(pref))
-            .get(SettingPreferenceViewModel::class.java)
+        settingPreferenceViewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[SettingPreferenceViewModel::class.java]
 
-        settingPreferenceViewModel.getThemeSetting().observe(this, { state ->
+        settingPreferenceViewModel.getThemeSetting().observe(this) { state ->
             Log.d("Settings", "$state")
 
             val theme = if (state) AppCompatDelegate.MODE_NIGHT_YES
@@ -41,7 +41,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
             AppCompatDelegate.setDefaultNightMode(theme)
             propertyAnim?.start()
-        })
+        }
 
         binding.imgSplash.alpha = alpha0
         propertyAnim = binding.imgSplash.animate().setDuration(time).alpha(alpha1).withEndAction {

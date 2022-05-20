@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailActivity: AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
 
     private lateinit var detailActViewModel: DetailActViewModel
     private lateinit var binding: ActivityDetailBinding
@@ -46,12 +46,12 @@ class DetailActivity: AppCompatActivity() {
         }.attach()
 
         supportActionBar?.hide()
-        binding.btnBack.setOnClickListener{ finish() }
+        binding.btnBack.setOnClickListener { finish() }
 
-        detailActViewModel = ViewModelProvider(this).get(DetailActViewModel::class.java)
+        detailActViewModel = ViewModelProvider(this)[DetailActViewModel::class.java]
 
         detailActViewModel.setDetail(username)
-        detailActViewModel.userDetail.observe(this, { users ->
+        detailActViewModel.userDetail.observe(this) { users ->
             Glide.with(this).load(users.avatar_url).circleCrop().into(binding.imgAvatar)
             binding.apply {
                 tvTextName.text = users.name
@@ -60,18 +60,18 @@ class DetailActivity: AppCompatActivity() {
                 includeDescription.tvTextLocation.text = users.location
                 includeDescription.tvTextRepo.text = users.public_repos.toString()
             }
-        })
+        }
 
-        detailActViewModel.isLoading.observe(this, {
+        detailActViewModel.isLoading.observe(this) {
             showLoading(it)
-        })
+        }
 
-       var isCheck = false
+        var isCheck = false
         CoroutineScope(Dispatchers.IO).launch {
             val count = detailActViewModel.checkUser(id)
             withContext(Dispatchers.Main) {
                 if (count != null) {
-                    if (count>0) {
+                    if (count > 0) {
                         binding.includeDescription.favoriteIcon.isChecked = true
                         isCheck = true
                     } else {
@@ -86,16 +86,17 @@ class DetailActivity: AppCompatActivity() {
             isCheck = !isCheck
             if (isCheck) {
                 detailActViewModel.addToFavorite(username, id, avatarUrl)
-                Toast.makeText(this@DetailActivity,"Added to Favorites", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DetailActivity, "Added to Favorites", Toast.LENGTH_SHORT).show()
             } else {
                 detailActViewModel.removeFromFavorite(id)
-                Toast.makeText(this@DetailActivity,"Removed from Favorites", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DetailActivity, "Removed from Favorites", Toast.LENGTH_SHORT)
+                    .show()
             }
             binding.includeDescription.favoriteIcon.isChecked = isCheck
         }
 
         binding.includeDescription.shareIcon.setOnClickListener {
-            val sendIntent : Intent = Intent().apply {
+            val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, "Github User : \n${user?.html_url} ")
                 type = "text/html"
@@ -108,7 +109,7 @@ class DetailActivity: AppCompatActivity() {
     private fun showLoading(isLoading: Boolean) {
         binding.pbDetail.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-    
+
     companion object {
         private val TAB_TITLES = intArrayOf(
             R.string.tab_following,

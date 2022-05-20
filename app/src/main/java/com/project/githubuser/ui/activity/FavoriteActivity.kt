@@ -12,7 +12,7 @@ import com.project.githubuser.db.FavoriteUser
 import com.project.githubuser.model.User
 import com.project.githubuser.viewModel.FavoriteViewModel
 
-class  FavoriteActivity : AppCompatActivity() {
+class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoriteBinding
     private lateinit var favViewModel: FavoriteViewModel
@@ -36,7 +36,7 @@ class  FavoriteActivity : AppCompatActivity() {
         listUserAdapter.notifyDataSetChanged()
         binding.rvFav.adapter = listUserAdapter
 
-        favViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        favViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
         listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
@@ -46,21 +46,26 @@ class  FavoriteActivity : AppCompatActivity() {
             }
         })
 
-        favViewModel.getFavoriteUser()?.observe(this,{
+        favViewModel.getFavoriteUser()?.observe(this) {
             if (it != null) {
-                val list =mapList(it)
+                val list = mapList(it)
                 listUserAdapter.setUser(list)
             }
-        })
+        }
     }
 
-    private fun mapList(users: List<FavoriteUser>): ArrayList<User>{
+    private fun mapList(users: List<FavoriteUser>): ArrayList<User> {
         val listUsers = ArrayList<User>()
         for (user in users) {
             val userMapped = User(
                 user.id,
                 user.login,
-                user.avatar_url
+                user.avatar_url,
+                user.name,
+                user.company,
+                user.location,
+                user.public_repos,
+                user.html_url,
             )
             listUsers.add(userMapped)
         }

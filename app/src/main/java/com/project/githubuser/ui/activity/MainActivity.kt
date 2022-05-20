@@ -21,7 +21,7 @@ import com.project.githubuser.viewModel.UserSearchViewModel
 class MainActivity : AppCompatActivity() {
 
     private var doubleBackToExitPressedOnce: Boolean = false
-    private val pressed:Long = 2000
+    private val pressed: Long = 2000
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var userSearchViewModel: UserSearchViewModel
@@ -51,21 +51,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingActivity::class.java))
         }
 
-        userSearchViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(UserSearchViewModel::class.java)
+        userSearchViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[UserSearchViewModel::class.java]
 
-        userSearchViewModel.userSearch.observe(this, { users ->
-            if ((users != null) && (users.size != 0)){
+        userSearchViewModel.userSearch.observe(this) { users ->
+            if ((users != null) && (users.size != 0)) {
                 listUserAdapter.setUser(users)
                 isFound()
             } else {
                 isNotFound()
             }
-        })
+        }
 
-        userSearchViewModel.isLoading.observe(this, {
+        userSearchViewModel.isLoading.observe(this) {
             showLoading(it)
-        })
+        }
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val search = binding.search
@@ -76,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                 binding.search.clearFocus()
                 return true
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }

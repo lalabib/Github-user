@@ -25,14 +25,14 @@ class SettingActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
 
         val pref = SettingPreferences.getInstance(dataStore)
-        settingPreferenceViewModel = ViewModelProvider(this, ViewModelFactory(pref))
-            .get(SettingPreferenceViewModel::class.java)
+        settingPreferenceViewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[SettingPreferenceViewModel::class.java]
 
-        binding.switchTheme.setOnCheckedChangeListener{ _, isChecked: Boolean ->
+        binding.switchTheme.setOnCheckedChangeListener { _, isChecked: Boolean ->
             settingPreferenceViewModel.saveThemeSetting(isChecked)
         }
 
-        settingPreferenceViewModel.getThemeSetting().observe(this, { state ->
+        settingPreferenceViewModel.getThemeSetting().observe(this) { state ->
             Log.d("Settings", "$state")
 
             val theme = if (state) AppCompatDelegate.MODE_NIGHT_YES
@@ -41,6 +41,6 @@ class SettingActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(theme)
 
             binding.switchTheme.isChecked = state
-        })
+        }
     }
 }
