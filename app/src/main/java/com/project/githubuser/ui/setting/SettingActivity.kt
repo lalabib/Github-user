@@ -1,4 +1,4 @@
-package com.project.githubuser.ui.activity
+package com.project.githubuser.ui.setting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.githubuser.databinding.ActivitySettingBinding
 import com.project.githubuser.preference.SettingPreferences
 import com.project.githubuser.preference.dataStore
-import com.project.githubuser.viewModel.SettingPreferenceViewModel
 import com.project.githubuser.viewModel.ViewModelFactory
 
 class SettingActivity : AppCompatActivity() {

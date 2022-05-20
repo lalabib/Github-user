@@ -3,6 +3,7 @@ package com.project.githubuser.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory
 import com.project.githubuser.preference.SettingPreferences
+import com.project.githubuser.ui.setting.SettingPreferenceViewModel
 
 class ViewModelFactory(private val pref: SettingPreferences) : NewInstanceFactory() {
 

@@ -1,4 +1,4 @@
-package com.project.githubuser.ui.activity
+package com.project.githubuser.ui.main
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.githubuser.adapter.ListUserAdapter
 import com.project.githubuser.databinding.ActivityMainBinding
 import com.project.githubuser.model.User
-import com.project.githubuser.viewModel.UserSearchViewModel
+import com.project.githubuser.ui.detail.DetailActivity
+import com.project.githubuser.ui.favorite.FavoriteActivity
+import com.project.githubuser.ui.setting.SettingActivity
 
 class MainActivity : AppCompatActivity() {
 

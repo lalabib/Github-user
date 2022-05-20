@@ -1,4 +1,4 @@
-package com.project.githubuser.ui.activity
+package com.project.githubuser.ui.splash
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.project.githubuser.databinding.ActivitySplashScreenBinding
 import com.project.githubuser.preference.SettingPreferences
 import com.project.githubuser.preference.dataStore
-import com.project.githubuser.viewModel.SettingPreferenceViewModel
+import com.project.githubuser.ui.main.MainActivity
+import com.project.githubuser.ui.setting.SettingPreferenceViewModel
 import com.project.githubuser.viewModel.ViewModelFactory
 
 class SplashScreenActivity : AppCompatActivity() {

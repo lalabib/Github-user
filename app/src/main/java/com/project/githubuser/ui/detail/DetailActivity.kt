@@ -1,4 +1,4 @@
-package com.project.githubuser.ui.activity
+package com.project.githubuser.ui.detail
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +14,6 @@ import com.project.githubuser.R
 import com.project.githubuser.adapter.SectionsPagerAdapter
 import com.project.githubuser.databinding.ActivityDetailBinding
 import com.project.githubuser.model.User
-import com.project.githubuser.viewModel.DetailActViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

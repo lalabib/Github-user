@@ -1,4 +1,4 @@
-package com.project.githubuser.ui.activity
+package com.project.githubuser.ui.favorite
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -11,7 +11,7 @@ import com.project.githubuser.adapter.ListUserAdapter
 import com.project.githubuser.databinding.ActivityFavoriteBinding
 import com.project.githubuser.db.FavoriteUser
 import com.project.githubuser.model.User
-import com.project.githubuser.viewModel.FavoriteViewModel
+import com.project.githubuser.ui.detail.DetailActivity
 
 class FavoriteActivity : AppCompatActivity() {
 

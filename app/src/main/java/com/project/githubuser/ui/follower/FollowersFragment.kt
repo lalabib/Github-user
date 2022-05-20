@@ -1,4 +1,4 @@
-package com.project.githubuser.ui.fragment
+package com.project.githubuser.ui.follower
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.githubuser.adapter.ListUserAdapter
 import com.project.githubuser.model.User
 import com.project.githubuser.databinding.FragmentFollowersBinding
-import com.project.githubuser.ui.activity.DetailActivity
-import com.project.githubuser.viewModel.FollowersViewModel
+import com.project.githubuser.ui.detail.DetailActivity
 
 class FollowersFragment : Fragment() {
 
