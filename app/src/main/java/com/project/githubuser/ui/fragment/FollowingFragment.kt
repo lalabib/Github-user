@@ -18,15 +18,17 @@ import com.project.githubuser.viewModel.FollowingViewModel
 class FollowingFragment : Fragment() {
 
     private var _binding: FragmentFollowingBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     private val listUser = ArrayList<User>()
     private lateinit var followingViewModel: FollowingViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentFollowingBinding.inflate(layoutInflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -35,29 +37,31 @@ class FollowingFragment : Fragment() {
 
         val username = arguments?.getString(ARG_USERNAME).toString()
 
-        binding?.rvFollowing?.layoutManager = LinearLayoutManager(activity)
-        binding?.rvFollowing?.setHasFixedSize(true)
+        binding.rvFollowing.layoutManager = LinearLayoutManager(activity)
+        binding.rvFollowing.setHasFixedSize(true)
 
         val userAdapter = ListUserAdapter(listUser)
         userAdapter.notifyDataSetChanged()
-        binding?.rvFollowing?.adapter = userAdapter
+        binding.rvFollowing.adapter = userAdapter
 
-        followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
-            .get(FollowingViewModel::class.java)
+        followingViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[FollowingViewModel::class.java]
 
         followingViewModel.setFollowing(username)
-        followingViewModel.listFollowing.observe(requireActivity(), { users ->
+        followingViewModel.listFollowing.observe(requireActivity()) { users ->
             if ((users != null) && (users.size != 0)) {
                 userAdapter.setUser(users)
                 isFollowing()
             } else {
                 isNotFollowing()
             }
-        })
+        }
 
-        followingViewModel.isLoading.observe(requireActivity(), {
+        followingViewModel.isLoading.observe(requireActivity()) {
             showLoading(it)
-        })
+        }
 
         userAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
@@ -69,23 +73,28 @@ class FollowingFragment : Fragment() {
     }
 
     private fun isFollowing() {
-        binding?.rvFollowing?.visibility = View.VISIBLE
-        binding?.ivNotFollowing?.visibility = View.INVISIBLE
+        binding.rvFollowing.visibility = View.VISIBLE
+        binding.ivNotFollowing.visibility = View.INVISIBLE
     }
 
     private fun isNotFollowing() {
-        binding?.rvFollowing?.visibility = View.INVISIBLE
-        binding?.ivNotFollowing?.visibility = View.VISIBLE
+        binding.rvFollowing.visibility = View.INVISIBLE
+        binding.ivNotFollowing.visibility = View.VISIBLE
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding?.pbFollowing?.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.pbFollowing.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-    
-     companion object {
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    companion object {
         private const val ARG_USERNAME = "username"
 
-        fun getUsername(username: String) : FollowingFragment {
+        fun getFollowing(username: String): FollowingFragment {
             val fragment = FollowingFragment()
             val bundle = Bundle()
             bundle.putString(ARG_USERNAME, username)

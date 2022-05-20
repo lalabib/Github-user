@@ -13,8 +13,8 @@ class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(a
     override fun createFragment(position: Int): Fragment {
         var fragment: Fragment? = null
         when (position) {
-            0 -> fragment = FollowingFragment.getUsername(username.toString())
-            1 -> fragment = FollowersFragment.getUsername(username.toString())
+            0 -> fragment = FollowingFragment.getFollowing(username.toString())
+            1 -> fragment = FollowersFragment.getFollower(username.toString())
        }
         return fragment as Fragment
     }
