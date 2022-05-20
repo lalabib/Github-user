@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.githubuser.adapter.ListUserAdapter
@@ -47,9 +48,12 @@ class FavoriteActivity : AppCompatActivity() {
         })
 
         favViewModel.getFavoriteUser()?.observe(this) {
-            if (it != null) {
+            if ((it != null) && (it.isNotEmpty())) {
                 val list = mapList(it)
                 listUserAdapter.setUser(list)
+                favUser()
+            } else {
+                notFavUser()
             }
         }
     }
@@ -65,5 +69,15 @@ class FavoriteActivity : AppCompatActivity() {
             listUsers.add(userMapped)
         }
         return listUsers
+    }
+
+    private fun favUser() {
+        binding.ivFavUser.visibility = View.INVISIBLE
+        binding.rvFav.visibility = View.VISIBLE
+    }
+
+    private fun notFavUser() {
+        binding.ivFavUser.visibility = View.VISIBLE
+        binding.rvFav.visibility = View.INVISIBLE
     }
 }

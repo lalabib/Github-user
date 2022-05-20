@@ -111,4 +111,10 @@
         <item name="android:layout_height">250dp</item>
         <item name="android:src">@drawable/notfollowing_dark</item>
     </style>
+
+    <style name="Fav">
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">350dp</item>
+        <item name="android:src">@drawable/favorite_dark</item>
+    </style>
 </resources>

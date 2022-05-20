@@ -54,4 +54,13 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/user_list" />
 
+    <ImageView
+        android:id="@+id/iv_fav_user"
+        style="@style/Fav"
+        android:contentDescription="@string/favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

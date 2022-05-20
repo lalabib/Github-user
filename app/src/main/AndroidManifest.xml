@@ -23,7 +23,8 @@
             android:exported="true" />
         <activity
             android:name=".ui.activity.DetailActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.SplashScreenActivity"
             android:exported="true"

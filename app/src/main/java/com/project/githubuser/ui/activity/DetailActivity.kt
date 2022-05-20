@@ -116,6 +116,5 @@ class DetailActivity : AppCompatActivity() {
             R.string.tab_follower
         )
         const val EXTRA_DETAIL = "extra_detail"
-        const val EXTRA_ID = "extra_id"
     }
 }
