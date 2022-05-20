@@ -13,7 +13,7 @@ class FavoriteViewModel(application: Application): AndroidViewModel(application)
     private var userDb: UserDatabase? = UserDatabase.getDatabase(application)
 
     init {
-        userDao = userDb?.userFavDAo()
+        userDao = userDb?.userFavDao()
     }
 
     fun getFavoriteUser(): LiveData<List<FavoriteUser>>? {

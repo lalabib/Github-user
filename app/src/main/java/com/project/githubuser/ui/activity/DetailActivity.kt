@@ -86,10 +86,10 @@ class DetailActivity : AppCompatActivity() {
             isCheck = !isCheck
             if (isCheck) {
                 detailActViewModel.addToFavorite(login, id, avatarUrl)
-                Toast.makeText(this@DetailActivity, "Added to Favorites", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DetailActivity, R.string.add_fav, Toast.LENGTH_SHORT).show()
             } else {
                 detailActViewModel.removeFromFavorite(id)
-                Toast.makeText(this@DetailActivity, "Removed from Favorites", Toast.LENGTH_SHORT)
+                Toast.makeText(this@DetailActivity, R.string.remove_fav, Toast.LENGTH_SHORT)
                     .show()
             }
             binding.includeDescription.favoriteIcon.isChecked = isCheck
@@ -116,5 +116,6 @@ class DetailActivity : AppCompatActivity() {
             R.string.tab_follower
         )
         const val EXTRA_DETAIL = "extra_detail"
+        const val EXTRA_ID = "extra_id"
     }
 }

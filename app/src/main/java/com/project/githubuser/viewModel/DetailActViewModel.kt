@@ -26,10 +26,11 @@ class DetailActViewModel(application: Application) : AndroidViewModel(applicatio
     val isLoading: LiveData<Boolean> = _isLoading
 
     private var userDao: UserFavDao?
-    private var userDb: UserDatabase? = UserDatabase.getDatabase(application)
+    private var userDb: UserDatabase?
 
     init {
-        userDao = userDb?.userFavDAo()
+        userDb = UserDatabase.getDatabase(application)
+        userDao = userDb?.userFavDao()
     }
 
     fun setDetail(username: String) {
@@ -54,7 +55,8 @@ class DetailActViewModel(application: Application) : AndroidViewModel(applicatio
     fun addToFavorite(username: String, id: Int, avatarUrl: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val user = FavoriteUser(
-                username, id, avatarUrl)
+                username, id, avatarUrl
+            )
             userDao?.addToFavorite(user)
         }
     }

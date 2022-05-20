@@ -15,4 +15,7 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="setting">Setting</string>
     <string name="favorite">Favorite User</string>
+
+    <string name="add_fav">Added to Favorites</string>
+    <string name="remove_fav">Removed from Favorites</string>
 </resources>
