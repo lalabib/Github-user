@@ -13,6 +13,7 @@ import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.project.githubuser.R
 import com.project.githubuser.adapter.ListUserAdapter
 import com.project.githubuser.databinding.ActivityMainBinding
 import com.project.githubuser.model.User
@@ -26,23 +27,21 @@ class MainActivity : AppCompatActivity() {
     private val pressed: Long = 2000
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var userSearchViewModel: UserSearchViewModel
 
-    private val listUser = ArrayList<User>()
-    private val listUserAdapter = ListUserAdapter(listUser)
+    private val listUserAdapter = ListUserAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+        listUserAdapter.onItemClickCallback = object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
                 val detailAct = Intent(this@MainActivity, DetailActivity::class.java)
                 detailAct.putExtra(DetailActivity.EXTRA_DETAIL, user)
                 startActivity(detailAct)
             }
-        })
+        }
 
         binding.btnFavorite.setOnClickListener {
             startActivity(Intent(this, FavoriteActivity::class.java))
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, SettingActivity::class.java))
         }
 
-        userSearchViewModel = ViewModelProvider(
+        val userSearchViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[UserSearchViewModel::class.java]
@@ -102,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
         this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, R.string.press_again, Toast.LENGTH_SHORT).show()
         Handler(Looper.getMainLooper()).postDelayed({
             doubleBackToExitPressedOnce = false
         }, pressed)

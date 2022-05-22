@@ -21,7 +21,6 @@ import kotlinx.coroutines.withContext
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var detailActViewModel: DetailActViewModel
     private lateinit var binding: ActivityDetailBinding
 
     var id: Int = 0
@@ -46,7 +45,7 @@ class DetailActivity : AppCompatActivity() {
 
         binding.btnBack.setOnClickListener { finish() }
 
-        detailActViewModel = ViewModelProvider(this)[DetailActViewModel::class.java]
+        val detailActViewModel = ViewModelProvider(this)[DetailActViewModel::class.java]
 
         detailActViewModel.setDetail(login)
         detailActViewModel.userDetail.observe(this) { users ->

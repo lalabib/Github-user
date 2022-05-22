@@ -18,8 +18,7 @@ class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
     private lateinit var favViewModel: FavoriteViewModel
 
-    private val listUser = ArrayList<User>()
-    private val listUserAdapter = ListUserAdapter(listUser)
+    private val listUserAdapter = ListUserAdapter()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +37,13 @@ class FavoriteActivity : AppCompatActivity() {
 
         favViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
-        listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+        listUserAdapter.onItemClickCallback = object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
                 val detailAct = Intent(this@FavoriteActivity, DetailActivity::class.java)
                 detailAct.putExtra(DetailActivity.EXTRA_DETAIL, user)
                 startActivity(detailAct)
             }
-        })
+        }
 
         favViewModel.getFavoriteUser()?.observe(this) {
             if ((it != null) && (it.isNotEmpty())) {
@@ -57,7 +56,7 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun mapList(users: List<FavoriteUser>): ArrayList<User>{
+    private fun mapList(users: List<FavoriteUser>): ArrayList<User> {
         val listUsers = ArrayList<User>()
         for (user in users) {
             val userMapped = User(

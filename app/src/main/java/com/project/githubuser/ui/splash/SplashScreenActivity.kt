@@ -21,7 +21,6 @@ class SplashScreenActivity : AppCompatActivity() {
     private var propertyAnim: ViewPropertyAnimator? = null
 
     private lateinit var binding: ActivitySplashScreenBinding
-    private lateinit var settingPreferenceViewModel: SettingPreferenceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +29,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val pref = SettingPreferences.getInstance(dataStore)
-        settingPreferenceViewModel =
+        val settingPreferenceViewModel =
             ViewModelProvider(this, ViewModelFactory(pref))[SettingPreferenceViewModel::class.java]
 
         settingPreferenceViewModel.getThemeSetting().observe(this) { state ->

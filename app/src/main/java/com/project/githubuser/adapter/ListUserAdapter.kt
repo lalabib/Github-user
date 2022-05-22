@@ -8,14 +8,12 @@ import com.bumptech.glide.Glide
 import com.project.githubuser.databinding.UserListBinding
 import com.project.githubuser.model.User
 
-class ListUserAdapter(private val listUser: ArrayList<User>):
+class ListUserAdapter :
     RecyclerView.Adapter<ListUserAdapter.ListViewHolder>() {
 
-    private lateinit var onItemClickCallback: OnItemClickCallback
+    private val listUser = ArrayList<User>()
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
+    var onItemClickCallback: OnItemClickCallback? = null
 
     @SuppressLint("NotifyDataSetChanged")
     fun setUser(users: ArrayList<User>) {
@@ -25,25 +23,34 @@ class ListUserAdapter(private val listUser: ArrayList<User>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(UserListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ListViewHolder(
+            UserListBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listUser[position])
-        holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(listUser[holder.adapterPosition])
+        val user = listUser[position]
+        holder.bind(user) {
+            onItemClickCallback?.onItemClicked(user)
         }
     }
 
     override fun getItemCount(): Int = listUser.size
 
-    class ListViewHolder(private val binding: UserListBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
+    class ListViewHolder(private val binding: UserListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: User, itemClicked: () -> Unit) {
             Glide.with(itemView.context)
                 .load(user.avatar_url)
                 .circleCrop()
                 .into(binding.imgItemPhoto)
             binding.tvItemName.text = user.login
+
+            itemView.setOnClickListener { itemClicked.invoke() }
         }
     }
 

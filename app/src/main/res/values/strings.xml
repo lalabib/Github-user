@@ -18,4 +18,5 @@
 
     <string name="add_fav">Added to Favorites</string>
     <string name="remove_fav">Removed from Favorites</string>
+    <string name="press_again">Press back again to exit</string>
 </resources>

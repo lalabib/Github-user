@@ -12,7 +12,6 @@ import com.project.githubuser.viewModel.ViewModelFactory
 
 class SettingActivity : AppCompatActivity() {
 
-    private lateinit var settingPreferenceViewModel: SettingPreferenceViewModel
     private lateinit var binding: ActivitySettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +23,7 @@ class SettingActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
 
         val pref = SettingPreferences.getInstance(dataStore)
-        settingPreferenceViewModel = ViewModelProvider(this, ViewModelFactory(pref))[SettingPreferenceViewModel::class.java]
+        val settingPreferenceViewModel = ViewModelProvider(this, ViewModelFactory(pref))[SettingPreferenceViewModel::class.java]
 
         binding.switchTheme.setOnCheckedChangeListener{ _, isChecked: Boolean ->
             settingPreferenceViewModel.saveThemeSetting(isChecked)

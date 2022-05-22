@@ -19,9 +19,6 @@ class FollowersFragment : Fragment() {
     private var _binding: FragmentFollowersBinding? = null
     private val binding get() = _binding!!
 
-    private val listUser = ArrayList<User>()
-    private lateinit var followersViewModel: FollowersViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,11 +36,11 @@ class FollowersFragment : Fragment() {
         binding.rvFollowers.layoutManager = LinearLayoutManager(activity)
         binding.rvFollowers.setHasFixedSize(true)
 
-        val userAdapter = ListUserAdapter(listUser)
+        val userAdapter = ListUserAdapter()
         userAdapter.notifyDataSetChanged()
         binding.rvFollowers.adapter = userAdapter
 
-        followersViewModel = ViewModelProvider(
+        val followersViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[FollowersViewModel::class.java]
@@ -62,13 +59,13 @@ class FollowersFragment : Fragment() {
             showLoading(it)
         }
 
-        userAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
+        userAdapter.onItemClickCallback = object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
                 val detail = Intent(activity, DetailActivity::class.java)
                 detail.putExtra(DetailActivity.EXTRA_DETAIL, user)
                 startActivity(detail)
             }
-        })
+        }
     }
 
     private fun isFollower() {
