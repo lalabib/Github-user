@@ -39,6 +39,7 @@ class FavoriteActivity : AppCompatActivity() {
             override fun onItemClicked(user: User) {
                 val detailAct = Intent(this@FavoriteActivity, DetailActivity::class.java)
                 detailAct.putExtra(DetailActivity.EXTRA_DETAIL, user)
+                detailAct.putExtra(DetailActivity.EXTRA_ID,user.id)
                 startActivity(detailAct)
             }
         }

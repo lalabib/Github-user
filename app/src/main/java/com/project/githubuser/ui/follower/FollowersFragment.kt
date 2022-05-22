@@ -63,6 +63,7 @@ class FollowersFragment : Fragment() {
             override fun onItemClicked(user: User) {
                 val detail = Intent(activity, DetailActivity::class.java)
                 detail.putExtra(DetailActivity.EXTRA_DETAIL, user)
+                detail.putExtra(DetailActivity.EXTRA_ID,user.id)
                 startActivity(detail)
             }
         }
