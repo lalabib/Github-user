@@ -14,7 +14,7 @@
 
     <CheckBox
         android:id="@+id/share_icon"
-        style="@style/CheckBox"
+        style="@style/Icon"
         android:layout_marginEnd="6dp"
         android:button="@drawable/selector_share"
         app:useMaterialThemeColors="false"
@@ -23,7 +23,7 @@
 
     <CheckBox
         android:id="@+id/favorite_icon"
-        style="@style/CheckBox"
+        style="@style/Icon"
         android:layout_marginEnd="45dp"
         app:useMaterialThemeColors="false"
         android:button="@drawable/favorite_icon"
