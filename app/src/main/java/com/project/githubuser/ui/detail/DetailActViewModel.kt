@@ -26,10 +26,9 @@ class DetailActViewModel(application: Application) : AndroidViewModel(applicatio
     val isLoading: LiveData<Boolean> = _isLoading
 
     private var userDao: UserFavDao?
-    private var userDb: UserDatabase?
+    private var userDb: UserDatabase? = UserDatabase.getDatabase(application)
 
     init {
-        userDb = UserDatabase.getDatabase(application)
         userDao = userDb?.userFavDao()
     }
 

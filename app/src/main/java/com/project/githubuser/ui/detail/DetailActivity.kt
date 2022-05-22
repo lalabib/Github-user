@@ -23,14 +23,13 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
 
-    var id: Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val user = intent.getParcelableExtra<User>(EXTRA_DETAIL)
+        val id = intent.getIntExtra(EXTRA_ID, 0)
         val login = user?.login.toString()
         val avatarUrl = user?.avatar_url.toString()
 
@@ -113,5 +112,6 @@ class DetailActivity : AppCompatActivity() {
             R.string.tab_follower
         )
         const val EXTRA_DETAIL = "extra_detail"
+        const val EXTRA_ID = "extra_id"
     }
 }
