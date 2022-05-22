@@ -16,8 +16,6 @@ import com.project.githubuser.ui.detail.DetailActivity
 class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoriteBinding
-    private lateinit var favViewModel: FavoriteViewModel
-
     private val listUserAdapter = ListUserAdapter()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -35,7 +33,7 @@ class FavoriteActivity : AppCompatActivity() {
         listUserAdapter.notifyDataSetChanged()
         binding.rvFav.adapter = listUserAdapter
 
-        favViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
+        val favViewModel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
         listUserAdapter.onItemClickCallback = object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {

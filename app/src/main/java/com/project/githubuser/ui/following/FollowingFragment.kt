@@ -90,7 +90,7 @@ class FollowingFragment : Fragment() {
     companion object {
         private const val ARG_USERNAME = "username"
 
-        fun getFollowing(username: String): FollowingFragment {
+        fun getInstance(username: String): FollowingFragment {
             val fragment = FollowingFragment()
             val bundle = Bundle()
             bundle.putString(ARG_USERNAME, username)
